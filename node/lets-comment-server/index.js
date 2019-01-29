@@ -55,14 +55,59 @@ dbActions.editPost = (id, title, body) => db
   .assign({ title, body })
   .write()
 
-dbActions.getComments = () => db
+dbActions.deletePost = (id) => {
+  db
+  .get('posts')
+  .find({ id })
+  .update('deleted', boolean => true)
+  .write()
+  db
   .get('comments')
+  .filter({ parentId: id})
+  .each(comment => comment.parentDeleted = true)
+  .write()
+}
+
+dbActions.getCommentsByPostId = (id) => db
+  .get('comments')
+  .filter({ parentId: id})
   .value()
+
+dbActions.getCommentById = (id) => db
+  .get('comments')
+  .find({ id })
+  .value()
+
+dbActions.addComment = (id, body, author) => db
+  .get('comments')
+  .push({
+    id: shortid.generate(),
+    parentId: id,
+    timestamp: Date.now(),
+    body,
+    author, 
+    voteScore: 1,
+    deleted: false,
+    parentDeleted: false
+  })
+  .write()
 
 dbActions.voteComment = (id, option) => db
   .get('comments')
   .find({ id })
   .update('voteScore', n => option === 'upVote' ? n + 1 : n - 1)
+  .write()
+
+dbActions.editComment = (id, body) => db
+  .get('comments')
+  .find({ id })
+  .assign({ body })
+  .write()
+
+dbActions.deleteComment = (id) => db
+  .get('comments')
+  .find({ id })
+  .update('deleted', boolean => true)
   .write()
 
 module.exports = dbActions;
