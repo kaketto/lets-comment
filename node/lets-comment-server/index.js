@@ -17,16 +17,19 @@ dbActions.getCategories = () => db
 
 dbActions.getPosts = () => db
   .get('posts')
+  .filter({ deleted: false })
   .value()
 
 dbActions.getPostsByCategory = (category) => db
   .get('posts')
   .find({ category })
+  .filter({ deleted: false })
   .value()
 
 dbActions.getPostById = (id) => db
   .get('posts')
   .find({ id })
+  .filter({ deleted: false })
   .value()
 
 dbActions.addPost = (title, body, author, category) => db
@@ -70,12 +73,13 @@ dbActions.deletePost = (id) => {
 
 dbActions.getCommentsByPostId = (id) => db
   .get('comments')
-  .filter({ parentId: id})
+  .filter({ parentId: id, deleted: false })
   .value()
 
 dbActions.getCommentById = (id) => db
   .get('comments')
   .find({ id })
+  .filter({ deleted: false, parentDeleted: false })
   .value()
 
 dbActions.addComment = (id, body, author) => db
