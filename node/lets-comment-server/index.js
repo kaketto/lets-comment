@@ -22,14 +22,12 @@ dbActions.getPosts = () => db
 
 dbActions.getPostsByCategory = (category) => db
   .get('posts')
-  .find({ category })
-  .filter({ deleted: false })
+  .filter({ category, deleted: false })
   .value()
 
 dbActions.getPostById = (id) => db
   .get('posts')
-  .find({ id })
-  .filter({ deleted: false })
+  .find({ id, deleted: false })
   .value()
 
 dbActions.addPost = (title, body, author, category) => db
@@ -42,7 +40,8 @@ dbActions.addPost = (title, body, author, category) => db
     author, 
     category,
     voteScore: 1,
-    deleted: false
+    deleted: false,
+    numberOfComments: 0
   })
   .write()
 
@@ -58,18 +57,16 @@ dbActions.editPost = (id, title, body) => db
   .assign({ title, body })
   .write()
 
-dbActions.deletePost = (id) => {
-  db
+dbActions.deletePost = (id) => db
   .get('posts')
   .find({ id })
   .update('deleted', boolean => true)
   .write()
-  db
+  && db
   .get('comments')
-  .filter({ parentId: id})
+  .filter({ parentId: id })
   .each(comment => comment.parentDeleted = true)
   .write()
-}
 
 dbActions.getCommentsByPostId = (id) => db
   .get('comments')
@@ -78,8 +75,7 @@ dbActions.getCommentsByPostId = (id) => db
 
 dbActions.getCommentById = (id) => db
   .get('comments')
-  .find({ id })
-  .filter({ deleted: false, parentDeleted: false })
+  .find({ id, deleted: false, parentDeleted: false })
   .value()
 
 dbActions.addComment = (id, body, author) => db
@@ -94,7 +90,12 @@ dbActions.addComment = (id, body, author) => db
     deleted: false,
     parentDeleted: false
   })
-  .write()
+  .write() 
+  && db
+    .get('posts')
+    .find({ id })
+    .update('numberOfComments', n => n + 1)
+    .write()
 
 dbActions.voteComment = (id, option) => db
   .get('comments')
@@ -108,10 +109,19 @@ dbActions.editComment = (id, body) => db
   .assign({ body })
   .write()
 
-dbActions.deleteComment = (id) => db
+dbActions.deleteComment = (id) => {
+  db
   .get('comments')
   .find({ id })
   .update('deleted', boolean => true)
   .write()
+
+  const parentId = db.get('comments').find({ id }).value().parentId
+  db
+  .get('posts')
+  .find({ id: parentId})
+  .update('numberOfComments', n => n - 1)
+  .write()
+}
 
 module.exports = dbActions;
