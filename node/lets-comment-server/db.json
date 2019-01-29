@@ -1,0 +1,120 @@
+{
+  "categories": [
+    {
+      "name": "places",
+      "path": "places"
+    },
+    {
+      "name": "food",
+      "path": "food"
+    },
+    {
+      "name": "activities",
+      "path": "activities"
+    }
+  ],
+  "posts": [
+    {
+      "id": "3X3yScBxe",
+      "timestamp": 1548775274784,
+      "title": "Spring trip",
+      "body": "Let's go to Siklos!",
+      "author": "Viki",
+      "category": "places",
+      "voteScore": 1,
+      "deleted": false
+    },
+    {
+      "id": "9Y3yScAxe",
+      "timestamp": 1548776825663,
+      "title": "other than an Easter trip",
+      "body": "Go to Azori islands",
+      "author": "en",
+      "category": "places",
+      "voteScore": 2,
+      "deleted": false
+    },
+    {
+      "id": "3X3zCdAxe",
+      "timestamp": 1548776874784,
+      "title": "Sunday brunch",
+      "body": "What shall we prepare on a Sunday brunch?",
+      "author": "en",
+      "category": "food",
+      "voteScore": 1,
+      "deleted": false
+    },
+    {
+      "id": "OfgJ8Lu3x",
+      "timestamp": 1548777322631,
+      "title": "mezeskalacs sutes",
+      "body": "mit vegyunk hozza?",
+      "author": "Kinga",
+      "category": "food",
+      "voteScore": 1,
+      "deleted": false
+    },
+    {
+      "id": "A7aD-Wtwb",
+      "timestamp": 1548777423476,
+      "title": "mezeskalacs sutes",
+      "body": "mit vegyunk hozza?",
+      "author": "Kinga",
+      "category": "food",
+      "voteScore": 1,
+      "deleted": false
+    },
+    {
+      "id": "6XbbQKWa0",
+      "timestamp": 1548777485593,
+      "title": "and now?",
+      "body": "mit vegyunk hozza?",
+      "author": "k2",
+      "category": "activities",
+      "voteScore": 1,
+      "deleted": false
+    },
+    {
+      "id": "b_KPeTx_u",
+      "timestamp": 1548777697831,
+      "title": "again?",
+      "body": "i want to go to sauna",
+      "author": "k2",
+      "category": "activities",
+      "voteScore": 1,
+      "deleted": false
+    },
+    {
+      "id": "xseD_jhLQ",
+      "timestamp": 1548777794039,
+      "title": "x",
+      "body": "y",
+      "author": "xy",
+      "category": "food",
+      "voteScore": 1,
+      "deleted": false
+    },
+    {
+      "id": "XpRsdA2tD",
+      "timestamp": 1548777814624,
+      "title": "x",
+      "body": "y",
+      "author": "xy",
+      "category": "food",
+      "voteScore": 1,
+      "deleted": false
+    }
+  ],
+  "comments": [
+    {
+      "id": "1.1",
+      "parentId": 1,
+      "timestamp": "",
+      "body": "Great idea!",
+      "author": "en",
+      "voteScore": 1,
+      "deleted": false,
+      "parentDeleted": false
+    }
+  ]
+}
