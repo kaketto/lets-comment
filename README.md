@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-This a 'post and comment' web app inspired by a Udacity project. 
+This a 'post and comment' web app inspired by a Udacity project. Node.js backend with lowDB. 
 
 ## Available Scripts
 
